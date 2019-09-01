@@ -8,6 +8,7 @@ endif()
 
 find_package(Threads REQUIRED)
 find_package(GTest   REQUIRED)
+find_package(Boost   REQUIRED)
 
 add_executable(print_ip       sources/main.cpp)
 add_executable(print_ip_gtest tests/print_ip_gtest.cpp)
