@@ -22,7 +22,12 @@ install:
   - sudo apt-get install -qq g++-7
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
 #doxygen
-  - sudo apt-get install doxygen
+#   - sudo apt-get install doxygen
+# Install dependencies
+addons:
+  apt:
+    packages:
+      - doxygen
 script:
 #try to know gcc version  
 - gcc --version
@@ -41,4 +46,4 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
-  local_dir: html
+  local_dir: $TRAVIS_BUILD_DIR/html
