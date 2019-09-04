@@ -1,9 +1,41 @@
+/*!
+*\file
+*\brief Convert IP address presented in set of supported types to std::string. 
+*
+*Supported IPv4 types:
+*    - all integral types(in this case each byte of source value will be represented
+*      in IP address token);
+*    - std::string will be out as is;
+*    - all container- like types, which support 'cbegin' and 'cend' methods(in this case
+*      each container element will be represented in IP address token);
+*    - std::tuple with homogeneous types of it arguments(in this case each argument of 
+*      tuple will be represented in IP address token);
+*
+*/
+
 #pragma once
 
 #include <string>
 #include <vector>
 #include <tuple>
 #include <type_traits>
+
+namespace {
+// ------------------------------------------------------------------
+template<typename... T>
+constexpr typename std::enable_if_t<sizeof...(T) < 2, bool>
+are_same() {
+    return true;
+}
+
+// ------------------------------------------------------------------
+template<typename A, typename B, typename... T>
+constexpr bool
+are_same() {
+    return std::is_same<A, B>::value && are_same<T...>();
+}
+} // namespace
+
 
 // ------------------------------------------------------------------
 template<typename T>
@@ -57,20 +89,6 @@ ip_to_string(const T& addr) {
         }
     }
     return result;
-}
-
-// ------------------------------------------------------------------
-template<typename... T>
-constexpr typename std::enable_if_t<sizeof...(T) < 2, bool>
-are_same() {
-    return true;
-}
-
-// ------------------------------------------------------------------
-template<typename A, typename B, typename... T>
-constexpr bool
-are_same() {
-    return std::is_same<A, B>::value && are_same<T...>();
 }
 
 // ------------------------------------------------------------------
