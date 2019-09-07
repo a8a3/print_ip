@@ -67,14 +67,12 @@ add_custom_command(
 )
 
 find_package(Doxygen)
-set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxyfile.in)
+set(DOXYGEN_IN  ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxyfile.in)
 set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/doxyfile)
-
 configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-message("Doxygen build started...")
 
-add_custom_target( doc_doxygen ALL
+add_custom_target( doc_doxygen
     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Generating documentation with Doxygen"
-    VERBATIM )
+    COMMENT "Generate documentation..."
+)
