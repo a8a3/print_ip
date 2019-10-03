@@ -32,7 +32,7 @@ are_same() {
 template<typename A, typename B, typename... T>
 constexpr bool
 are_same() {
-    return std::is_same<A, B>::value && are_same<T...>();
+    return std::is_same<A, B>::value && are_same<B, T...>();
 }
 } // namespace
 
