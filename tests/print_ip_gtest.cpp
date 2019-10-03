@@ -15,6 +15,9 @@ TEST(IPtoStringTest, are_same_test) {
     static_assert(are_same<int, int>(), "int, int types are not same" );
     static_assert(are_same<int, int, int>(), "int, int, int types are not same" );
     static_assert(!are_same<float, int>(), "float, int types are same" );
+    static_assert(!are_same<float, float, int, int>(), "float, float, int, int types are same" );
+    static_assert(!are_same<float, int, int>(), "float, int, int types are same" );
+    static_assert(!are_same<float, float, int>(), "float, float, int types are same" );
     static_assert(!are_same<int, int, int, float>(), "int, int, int, float types are same" );
 }
 
